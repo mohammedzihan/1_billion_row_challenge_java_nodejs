@@ -11,13 +11,13 @@ My overall plan was to partition the file into ranges equal to the number of cor
 
 In NodeJS, used Worker threads to process each partitioned file & leverage multiple cores, File streams & Generators to read & process the file chunks & avoid memory overhead, Bit shifting & Buffers to efficiently parse & aggregate the station names & temperatures. The overall system time (System config: 16GB RAM, 8vCPU) for processing 100 Million rows came out 5.43 seconds with 731% CPU utilization, 125784 Max RSS. 
 
-O/P --> 41.38user 0.78system 0:05.76elapsed 731%CPU (0avgtext+0avgdata 125784maxresident)k
-62848inputs+0outputs (542major+25530minor)pagefaults 0swaps
+**O/P --> 41.38user 0.78system 0:05.76elapsed 731%CPU (0avgtext+0avgdata 125784maxresident)k
+62848inputs+0outputs (542major+25530minor)pagefaults 0swaps**
 
 In Java, experimented with a few different approaches using parallel streams, completable futures, executor threadpool, treemap for sorted aggregation, unsafe memory allocation for direct access to memory. Best system elapsed time achieved in Java came out to be 3.80 seconds for processing 100 Million entries. 
 
-O/P --> 14.06user 1.68system 0:03.80elapsed 414%CPU (0avgtext+0avgdata 4558884maxresident)k
-0inputs+88outputs (11major+822216minor)pagefaults 0swaps
+**O/P --> 14.06user 1.68system 0:03.80elapsed 414%CPU (0avgtext+0avgdata 4558884maxresident)k
+0inputs+88outputs (11major+822216minor)pagefaults 0swaps**
 
 TODO: 
 1. Trying out different file reading strategy like using a memory-mapped file if the entire file can fit into memory.
